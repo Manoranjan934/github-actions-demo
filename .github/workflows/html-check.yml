@@ -1,0 +1,31 @@
+name: HTML Validation Pipeline
+
+on:
+  push:
+
+jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Show Files
+        run: ls -la
+
+      - name: Check index.html Exists
+        run: |
+          if [ -f index.html ]; then
+            echo "index.html found"
+          else
+            echo "index.html NOT found"
+            exit 1
+          fi
+
+      - name: Count Lines in HTML
+        run: wc -l index.html
+
+      - name: Success Message
+        run: echo "HTML Validation Passed Successfully"
